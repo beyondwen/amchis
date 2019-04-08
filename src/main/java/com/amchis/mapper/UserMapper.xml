@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amchis.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.amchis.bean.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="telephone" property="telephone"/>
+        <result column="address" property="address"/>
+        <result column="enabled" property="enabled"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="userface" property="userface"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+    <resultMap id="lazyLoadRoles" type="com.amchis.bean.User" extends="BaseResultMap">
+        <collection property="roles" ofType="com.amchis.bean.Role"
+                    select="com.amchis.mapper.UserMapper.getRolesByUserId"
+                    column="id"></collection>
+    </resultMap>
+    <resultMap id="eagerLoadRoles" type="com.amchis.bean.User" extends="BaseResultMap">
+        <collection property="roles" ofType="com.amchis.bean.Role">
+            <id property="id" column="rid"/>
+            <result property="name" column="rname"/>
+            <result property="nameZh" column="rnameZh"/>
+        </collection>
+    </resultMap>
+    <select id="loadUserByUsername" resultMap="lazyLoadRoles">
+        select * from user WHERE username=#{username};
+    </select>
+    <select id="getRolesByUserId" resultType="com.amchis.bean.Role">
+        SELECT r.* FROM user_role u,role r where u.rid=r.id AND u.uid=#{id}
+    </select>
+    <insert id="userReg">
+        INSERT INTO user set username=#{username},password=#{password}
+    </insert>
+    <select id="getUsersByKeywords" resultMap="eagerLoadRoles">
+        select
+        u.*,
+        r.id rid,
+        r.NAME rname,
+        r.nameZh rnameZh
+        FROM
+        USER u
+        LEFT JOIN user_role u_r ON u.id = u_r.uid
+        LEFT JOIN role r ON u_r.rid = r.id
+        <where>
+            and u.id NOT IN ( SELECT * FROM user_role u_r, role r WHERE u_r.rid = r.id AND r.nameZh = '系统管理员' )
+            <if test="keywords!='all' and keywords!=''">
+                and u.name like concat('%',#{keywords},'%')
+            </if>
+        </where>
+        order by u.id limit 10
+    </select>
+    <select id="getUserById" resultMap="eagerLoadRoles">
+        SELECT
+            u.*,
+            r.id AS rid,
+            r.name AS rname,
+            r.nameZh AS rnameZh
+        FROM user u  LEFT JOIN user_role u_r ON u.id = u_r.uid
+        LEFT JOIN role r ON u_r.rid = r.id
+         where u.id =#{uId}
+    </select>
+    <update id="updateUser" parameterType="com.amchis.bean.User">
+        update user
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=CHAR},
+            </if>
+            <if test="telephone != null">
+                telephone = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=BIT},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userface != null">
+                userface = #{userface,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteRoleByUserId" parameterType="Long">
+        DELETE FROM user_role where uid=#{uId}
+    </delete>
+    <insert id="addRolesForUser">
+        INSERT INTO user_role(uid,rid) VALUES
+        <foreach collection="rids" separator="," item="rid">
+            (#{uId},#{rid})
+        </foreach>
+    </insert>
+    <delete id="deleteUser" parameterType="Long">
+        DELETE FROM user WHERE id=#{uId}
+    </delete>
+    <select id="getAllUser" resultType="com.amchis.bean.User">
+        select * from user
+        <if test="currentId!=null">
+            WHERE id !=#{currentId}
+        </if>
+    </select>
+</mapper>

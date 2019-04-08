@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amchis.mapper.HomeNewsMapper">
+    <resultMap id="BaseResultMap" type="com.amchis.bean.HomeNews">
+        <id column="news_id" jdbcType="TINYINT" property="id"/>
+        <result column="news_type" jdbcType="TINYINT" property="newsType"/>
+        <result column="news_title" jdbcType="VARCHAR" property="newsTitle"/>
+        <result column="news_content" jdbcType="VARCHAR" property="newsContent"/>
+        <result column="new_is_valid" jdbcType="TINYINT" property="newIsValid"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="create_userid" jdbcType="VARCHAR" property="createUserid"/>
+        <result column="create_username" jdbcType="VARCHAR" property="createUsername"/>
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime"/>
+        <result column="update_userid" jdbcType="VARCHAR" property="updateUserid"/>
+        <result column="update_username" jdbcType="VARCHAR" property="updateUsername"/>
+        <result column="news_sub_title" jdbcType="VARCHAR" property="newsSubTitle"/>
+        <result column="news_main_image" jdbcType="VARCHAR" property="newsMainImage"/>
+        <result column="news_classification" jdbcType="TINYINT" property="newsclassification"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    news_id, news_type, news_title, news_content, new_is_valid, create_time, create_userid, 
+    create_username, update_time, update_userid, update_username,news_sub_title,news_main_image,news_classification
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from home_news
+        where news_id = #{id,jdbcType=TINYINT}
+    </select>
+    <select id="getNews" resultMap="BaseResultMap" parameterType="com.amchis.bean.query.HomeNewQuery">
+        select
+        <include refid="Base_Column_List"/>
+        from home_news
+        <where>
+            <if test="valid != null">
+                and new_is_valid = #{valid}
+            </if>
+            <if test="type != null">
+                and news_type = #{type}
+            </if>
+            <if test="classification != null">
+                and news_classification = #{classification}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from home_news
+    where news_id = #{id,jdbcType=TINYINT}
+  </delete>
+    <insert id="insert" parameterType="com.amchis.bean.HomeNews">
+    insert into home_news (news_id, news_type, news_title, 
+      news_content, new_is_valid, create_time, 
+      create_userid, create_username, update_time, 
+      update_userid, update_username,news_sub_title,news_main_image,news_classification)
+    values (#{id,jdbcType=TINYINT}, #{newsType,jdbcType=TINYINT}, #{newsTitle,jdbcType=VARCHAR},
+      #{newsContent,jdbcType=VARCHAR}, #{newIsValid,jdbcType=TINYINT}, #{createTime,jdbcType=VARCHAR},
+      #{createUserid,jdbcType=VARCHAR}, #{createUsername,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR},
+      #{updateUserid,jdbcType=VARCHAR}, #{updateUsername,jdbcType=VARCHAR},#{newsSubTitle},#{newsMainImage},#{newsclassification})
+  </insert>
+    <insert id="insertSelective" parameterType="com.amchis.bean.HomeNews">
+        insert into home_news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                news_id,
+            </if>
+            <if test="newsType != null">
+                news_type,
+            </if>
+            <if test="newsTitle != null">
+                news_title,
+            </if>
+            <if test="newsContent != null">
+                news_content,
+            </if>
+            <if test="newIsValid != null">
+                new_is_valid,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createUserid != null">
+                create_userid,
+            </if>
+            <if test="createUsername != null">
+                create_username,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateUserid != null">
+                update_userid,
+            </if>
+            <if test="updateUsername != null">
+                update_username,
+            </if>
+            <if test="newsSubTitle != null">
+                news_sub_title,
+            </if>
+            <if test="newsMainImage != null">
+                news_main_image,
+            </if>
+            <if test="newsclassification != null">
+                news_classification,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=TINYINT},
+            </if>
+            <if test="newsType != null">
+                #{newsType,jdbcType=TINYINT},
+            </if>
+            <if test="newsTitle != null">
+                #{newsTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="newsContent != null">
+                #{newsContent,jdbcType=VARCHAR},
+            </if>
+            <if test="newIsValid != null">
+                #{newIsValid,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserid != null">
+                #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null">
+                #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserid != null">
+                #{updateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUsername != null">
+                #{updateUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="newsSubTitle != null">
+                #{newsSubTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="newsMainImage != null">
+                #{newsMainImage,jdbcType=VARCHAR},
+            </if>
+            <if test="newsclassification != null">
+                #{newsclassification},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.amchis.bean.HomeNews">
+        update home_news
+        <set>
+            <if test="newsType != null">
+                news_type = #{newsType,jdbcType=TINYINT},
+            </if>
+            <if test="newsTitle != null">
+                news_title = #{newsTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="newsContent != null">
+                news_content = #{newsContent,jdbcType=VARCHAR},
+            </if>
+            <if test="newIsValid != null">
+                new_is_valid = #{newIsValid,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserid != null">
+                create_userid = #{createUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null">
+                create_username = #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserid != null">
+                update_userid = #{updateUserid,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUsername != null">
+                update_username = #{updateUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="newsSubTitle != null">
+                news_sub_title = #{newsSubTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="newsMainImage != null">
+                news_main_image = #{newsMainImage,jdbcType=VARCHAR},
+            </if>
+            <if test="newsclassification != null">
+                news_classification = #{newsclassification},
+            </if>
+        </set>
+        where news_id = #{id,jdbcType=TINYINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.amchis.bean.HomeNews">
+    update home_news
+    set news_type = #{newsType,jdbcType=TINYINT},
+      news_title = #{newsTitle,jdbcType=VARCHAR},
+      news_content = #{newsContent,jdbcType=VARCHAR},
+      new_is_valid = #{newIsValid,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      create_userid = #{createUserid,jdbcType=VARCHAR},
+      create_username = #{createUsername,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      update_userid = #{updateUserid,jdbcType=VARCHAR},
+      update_username = #{updateUsername,jdbcType=VARCHAR},
+      news_sub_title = #{newsSubTitle,jdbcType=VARCHAR},
+      news_main_image = #{newsMainImage,jdbcType=VARCHAR},
+      news_classification = #{newsclassification}
+    where news_id = #{id,jdbcType=TINYINT}
+  </update>
+</mapper>

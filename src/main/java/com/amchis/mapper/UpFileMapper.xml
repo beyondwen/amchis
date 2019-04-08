@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amchis.mapper.UpFileMapper">
+    <resultMap id="BaseResultMap" type="com.amchis.bean.UpFile">
+        <id column="file_id" jdbcType="VARCHAR" property="id"/>
+        <result column="file_type" jdbcType="VARCHAR" property="type"/>
+        <result column="file_name" jdbcType="VARCHAR" property="name"/>
+        <result column="file_size" jdbcType="DECIMAL" property="size"/>
+        <result column="file_up_url" jdbcType="VARCHAR" property="url"/>
+        <result column="file_is_valid" jdbcType="VARCHAR" property="valid"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="create_userid" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="create_username" jdbcType="VARCHAR" property="createUser"/>
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime"/>
+        <result column="update_userid" jdbcType="VARCHAR" property="updateUserId"/>
+        <result column="update_username" jdbcType="VARCHAR" property="updateUser"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        file_id, create_username, update_username, file_name, file_up_url,
+        file_is_valid, create_userid, create_time,
+        update_userid, update_time, file_size, file_type
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from upfile
+        where file_id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectBySheetId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from upfile
+        where update_username = #{updateUser,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByPrimaryKeyNotSheetId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from upfile where file_id = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete
+        from upfile
+        where file_id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.amchis.bean.UpFile">
+        insert into upfile (file_id,
+                               create_username,
+                               update_username,
+                               file_name,
+
+                               file_up_url,
+                               file_is_valid,
+                               create_userid,
+                               create_time,
+                               update_userid,
+                               update_time,
+                               file_type,
+                               file_size)
+        values (#{id},
+                #{createUser},
+                #{updateUser},
+                #{name},
+
+                #{url},
+                #{valid},
+                #{createUserId},
+                #{createTime},
+                #{updateUserId},
+                #{updateTime},
+                #{type},
+                #{size})
+    </insert>
+    <insert id="insertSelective" parameterType="com.amchis.bean.UpFile">
+        insert into upfile
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                file_id,
+            </if>
+            <if test="createUser != null">
+                create_username,
+            </if>
+            <if test="updateUser != null">
+                update_username,
+            </if>
+            <if test="name != null">
+                file_name,
+            </if>
+
+            <if test="url != null">
+                file_up_url,
+            </if>
+            <if test="valid != null">
+                file_is_valid,
+            </if>
+            <if test="createUserId != null">
+                create_userid,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUserId != null">
+                update_userid,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="size != null">
+                file_size,
+            </if>
+            <if test="type != null">
+                file_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="valid != null">
+                #{valid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="size != null">
+                #{size,jdbcType=DECIMAL},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.amchis.bean.UpFile">
+        update upfile
+        <set>
+            <if test="createUser != null">
+                create_username = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUser != null">
+                update_username = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                file_name = #{name,jdbcType=VARCHAR},
+            </if>
+
+            <if test="url != null">
+                file_up_url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="valid != null">
+                file_is_valid = #{valid,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                create_userid = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserId != null">
+                update_userid = #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="type !=null">
+                file_type = #{type,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where file_id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.amchis.bean.UpFile">
+        update upfile
+        set create_username             = #{createUser,jdbcType=VARCHAR},
+            update_username           = #{updateUser,jdbcType=VARCHAR},
+            file_name               = #{name,jdbcType=VARCHAR},
+
+            file_up_url             = #{url,jdbcType=VARCHAR},
+            file_is_valid          = #{valid,jdbcType=VARCHAR},
+            create_userid          = #{createUserId,jdbcType=VARCHAR},
+            create_time        = #{createTime,jdbcType=VARCHAR},
+            update_userid = #{updateUserId,jdbcType=VARCHAR},
+            update_time   = #{updateTime,jdbcType=VARCHAR},
+            file_type               = #{type},
+            file_size               = #{size}
+        where file_id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectFileBySheetId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from upfile
+        <where>
+            <if test="sheetId != null">
+                and update_username = #{sheetId}
+            </if>
+            <if test="type != null">
+                and file_type = #{type}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectFileBySheetIdPage" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from upfile
+        <where>
+            <if test="sheetId != null">
+                and update_username = #{sheetId}
+            </if>
+            <if test="type != null and type !=''">
+                and file_type = #{type}
+            </if>
+            and file_is_valid = '1'
+        </where>
+    </select>
+
+    <select id="selectFileBySheetIdNotPage" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from upfile
+        <where>
+            <if test="sheetId != null">
+                and update_username = #{sheetId}
+            </if>
+        </where>
+    </select>
+    <select id="selectFileNameIsExist" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from upfile
+        <where>
+            <if test="name != null">
+                and file_name = #{name}
+            </if>
+            <if test="orgId != null">
+                and create_username = #{orgId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getFileBySheetId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from upfile uf
+        where uf.update_username = #{id}
+    </select>
+
+    <select id="getFileBySheetIdAndType" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from upfile uf
+        where uf.update_username = #{updateUser}
+        and uf.file_type = #{type}
+    </select>
+    <delete id="deleteByFileSheetId" parameterType="java.lang.String">
+        delete
+        from upfile
+        where
+        update_username = #{updateUser,jdbcType=VARCHAR}
+    </delete>
+</mapper>

@@ -35,31 +35,39 @@ public class Questionnaire {
     private String drink;
 
     //喜欢的运动
-    private String favoriteSport;
+    private String[] favoriteSport;
+    private String favoriteSports;
 
     //周锻炼时间
-    private String weeklyExerciseTime;
+    private String[] weeklyExerciseTime;
+    private String weeklyExerciseTimes;
 
     //健康投资
-    private String healthInvestment;
+    private String[] healthInvestment;
+    private String healthInvestments;
 
     //糖尿病
-    private String diabetes;
+    private String[] diabetes;
+    private String diabetess;
 
     //心血管疾病
-    private String cardiovascularDisease;
+    private String[] cardiovascularDisease;
+    private String cardiovascularDiseases;
 
     //皮肤病
-    private String skinDisease;
+    private String[] skinDisease;
+    private String skinDiseases;
 
     //感染
-    private String infection;
+    private String[] infection;
+    private String infections;
 
     //在服药物及不良反应
     private String adverseReactions;
 
     //家族病史
-    private String medicalHistory;
+    private String[] medicalHistory;
+    private String medicalHistorys;
 
     //手术史
     private String historyOfSurgery;

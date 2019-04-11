@@ -16,6 +16,7 @@ public interface HomeNewsMapper {
     int insertSelective(HomeNews record);
 
     HomeNews selectByPrimaryKey(int newsId);
+
     Page<HomeNews> getNews(HomeNewQuery query);
 
     int updateByPrimaryKeySelective(HomeNews record);

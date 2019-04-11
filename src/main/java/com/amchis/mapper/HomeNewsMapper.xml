@@ -15,7 +15,7 @@
         <result column="update_username" jdbcType="VARCHAR" property="updateUsername"/>
         <result column="news_sub_title" jdbcType="VARCHAR" property="newsSubTitle"/>
         <result column="news_main_image" jdbcType="VARCHAR" property="newsMainImage"/>
-        <result column="news_classification" jdbcType="TINYINT" property="newsclassification"/>
+        <result column="news_classification" jdbcType="TINYINT" property="classification"/>
     </resultMap>
     <sql id="Base_Column_List">
     news_id, news_type, news_title, news_content, new_is_valid, create_time, create_userid, 
@@ -56,7 +56,7 @@
     values (#{id,jdbcType=TINYINT}, #{newsType,jdbcType=TINYINT}, #{newsTitle,jdbcType=VARCHAR},
       #{newsContent,jdbcType=VARCHAR}, #{newIsValid,jdbcType=TINYINT}, #{createTime,jdbcType=VARCHAR},
       #{createUserid,jdbcType=VARCHAR}, #{createUsername,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR},
-      #{updateUserid,jdbcType=VARCHAR}, #{updateUsername,jdbcType=VARCHAR},#{newsSubTitle},#{newsMainImage},#{newsclassification})
+      #{updateUserid,jdbcType=VARCHAR}, #{updateUsername,jdbcType=VARCHAR},#{newsSubTitle},#{newsMainImage},#{classification})
   </insert>
     <insert id="insertSelective" parameterType="com.amchis.bean.HomeNews">
         insert into home_news
@@ -100,7 +100,7 @@
             <if test="newsMainImage != null">
                 news_main_image,
             </if>
-            <if test="newsclassification != null">
+            <if test="classification != null">
                 news_classification,
             </if>
         </trim>
@@ -144,8 +144,8 @@
             <if test="newsMainImage != null">
                 #{newsMainImage,jdbcType=VARCHAR},
             </if>
-            <if test="newsclassification != null">
-                #{newsclassification},
+            <if test="classification != null">
+                #{classification},
             </if>
         </trim>
     </insert>
@@ -188,8 +188,8 @@
             <if test="newsMainImage != null">
                 news_main_image = #{newsMainImage,jdbcType=VARCHAR},
             </if>
-            <if test="newsclassification != null">
-                news_classification = #{newsclassification},
+            <if test="classification != null">
+                news_classification = #{classification},
             </if>
         </set>
         where news_id = #{id,jdbcType=TINYINT}
@@ -208,7 +208,7 @@
       update_username = #{updateUsername,jdbcType=VARCHAR},
       news_sub_title = #{newsSubTitle,jdbcType=VARCHAR},
       news_main_image = #{newsMainImage,jdbcType=VARCHAR},
-      news_classification = #{newsclassification}
+      news_classification = #{classification}
     where news_id = #{id,jdbcType=TINYINT}
   </update>
 </mapper>

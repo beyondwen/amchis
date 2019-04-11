@@ -38,5 +38,5 @@ public class HomeNews implements Serializable {
     private String newsMainImage;
 
     //新闻分类
-    private Integer newsclassification;
+    private Integer classification;
 }

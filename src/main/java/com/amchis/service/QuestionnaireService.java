@@ -4,6 +4,7 @@ import com.amchis.bean.Questionnaire;
 import com.amchis.bean.query.QuestionnaireQuery;
 import com.amchis.mapper.QuestionnaireMapper;
 import com.github.pagehelper.Page;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -95,6 +96,7 @@ public class QuestionnaireService {
     }
 
     public Page<Questionnaire> getQuestionnaire(QuestionnaireQuery query) {
-        return questionnaireMapper.getQuestionnaire(query);
+        Page<Questionnaire> questionnaire = questionnaireMapper.getQuestionnaire(query);
+        return questionnaire;
     }
 }

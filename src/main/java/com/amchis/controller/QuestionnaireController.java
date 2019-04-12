@@ -62,6 +62,7 @@ public class QuestionnaireController extends BaseApiService<Questionnaire> {
      */
     @PostMapping(value = "/get")
     public PageInfo<Questionnaire> lists(@RequestBody QuestionnaireQuery query) {
+        //如果有时间为导出  不分页
         String startTime = query.getStartTime();
         String endTime = query.getEndTime();
         if (StringUtils.isEmpty(startTime) && StringUtils.isEmpty(endTime)) {

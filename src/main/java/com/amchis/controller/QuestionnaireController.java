@@ -8,6 +8,7 @@ import com.amchis.common.DateUtils;
 import com.amchis.service.QuestionnaireService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,7 @@ public class QuestionnaireController extends BaseApiService<Questionnaire> {
         } else {
             if ((record.getId() == null)) {
                 record.setCreateTime(DateUtils.getTime());
+                record.setValid("未查看");
                 int i = questionnaireService.insert(record);
                 if (!toDaoResult(i)) {
                     return setResultError("系统错误");
@@ -60,7 +62,11 @@ public class QuestionnaireController extends BaseApiService<Questionnaire> {
      */
     @PostMapping(value = "/get")
     public PageInfo<Questionnaire> lists(@RequestBody QuestionnaireQuery query) {
-        PageHelper.startPage(query.getPageNo(), query.getPageSize());
+        String startTime = query.getStartTime();
+        String endTime = query.getEndTime();
+        if (StringUtils.isEmpty(startTime) && StringUtils.isEmpty(endTime)) {
+            PageHelper.startPage(query.getPageNo(), query.getPageSize());
+        }
         return new PageInfo(questionnaireService.getQuestionnaire(query));
     }
 
@@ -73,6 +79,8 @@ public class QuestionnaireController extends BaseApiService<Questionnaire> {
     @PostMapping(value = "/getOne")
     public BaseResponse<Questionnaire> getOneQuestionnaire(@RequestBody QuestionnaireQuery record) {
         Questionnaire questionnaire = questionnaireService.selectByPrimaryKey(record.getId());
+        questionnaire.setValid("已查看");
+        questionnaireService.updateByPrimaryKeySelective(questionnaire);
         return setResultSuccess(questionnaire);
     }
 }

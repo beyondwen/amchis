@@ -73,7 +73,7 @@ public class QuestionnaireService {
             stringBuilder.append(s);
             mark++;
             if (length != mark) {
-                stringBuilder.append(",");
+                stringBuilder.append("、");
             }
         }
     }

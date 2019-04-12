@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.amchis.bean.Questionnaire">
     <id column="id" jdbcType="TINYINT" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="valid" jdbcType="VARCHAR" property="valid" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="career" jdbcType="VARCHAR" property="career" />
     <result column="educational_level" jdbcType="VARCHAR" property="educationalLevel" />
@@ -25,7 +25,7 @@
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_name, gender, phone, career, educational_level, marital_status, sleep_condition, 
+    id, user_name, valid, phone, career, educational_level, marital_status, sleep_condition,
     smoking, drink, favorite_sport, weekly_exercise_time, health_investment, diabetes,
     cardiovascular_disease, skin_disease, infection, adverse_reactions, medical_history,
     history_of_surgery,create_time
@@ -41,14 +41,14 @@
     where id = #{id,jdbcType=TINYINT}
   </delete>
   <insert id="insert" parameterType="com.amchis.bean.Questionnaire">
-    insert into questionnaire (user_name, gender,
+    insert into questionnaire (user_name, valid,
       phone, career, educational_level, 
       marital_status, sleep_condition, smoking, 
       drink, favorite_sport, weekly_exercise_time, 
       health_investment, diabetes, cardiovascular_disease,
       skin_disease, infection, adverse_reactions,
       medical_history, history_of_surgery,create_time)
-    values (#{userName,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR},
+    values (#{userName,jdbcType=VARCHAR}, #{valid,jdbcType=VARCHAR},
       #{phone,jdbcType=VARCHAR}, #{career,jdbcType=VARCHAR}, #{educationalLevel,jdbcType=VARCHAR}, 
       #{maritalStatus,jdbcType=VARCHAR}, #{sleepCondition,jdbcType=VARCHAR}, #{smoking,jdbcType=VARCHAR}, 
       #{drink,jdbcType=VARCHAR}, #{favoriteSports,jdbcType=VARCHAR}, #{weeklyExerciseTimes,jdbcType=VARCHAR},
@@ -62,8 +62,8 @@
       <if test="userName != null">
         user_name,
       </if>
-      <if test="gender != null">
-        gender,
+      <if test="valid != null">
+        valid,
       </if>
       <if test="phone != null">
         phone,
@@ -124,8 +124,8 @@
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
+      <if test="valid != null">
+        #{valid,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
@@ -189,8 +189,8 @@
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=VARCHAR},
+      <if test="valid != null">
+        valid = #{valid,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
@@ -252,7 +252,7 @@
   <update id="updateByPrimaryKey" parameterType="com.amchis.bean.Questionnaire">
     update questionnaire
     set user_name = #{userName,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
+      valid = #{valid,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       career = #{career,jdbcType=VARCHAR},
       educational_level = #{educationalLevel,jdbcType=VARCHAR},
@@ -281,6 +281,12 @@
     <where>
       <if test="name != null">
         AND user_name like "%" #{name} "%"
+      </if>
+      <if test="startTime !=null and startTime !=''">
+        and create_time &gt;= str_to_date(#{startTime},'%Y-%m-%d')
+      </if>
+      <if test="endTime !=null and endTime !=''">
+        and create_time &lt;= DATE_ADD(str_to_date(#{endTime},'%Y-%m-%d'),INTERVAL 1 DAY)
       </if>
     </where>
     order by create_time desc

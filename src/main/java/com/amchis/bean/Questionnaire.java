@@ -10,8 +10,8 @@ public class Questionnaire {
     //姓名
     private String userName;
 
-    //性别
-    private String gender;
+    //(未查看/已查看查看)
+    private String valid;
 
     //手机号码
     private String phone;

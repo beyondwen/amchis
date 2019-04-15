@@ -84,7 +84,12 @@
             <artifactId>nacos-config-spring-boot-starter</artifactId>
             <version>0.2.1</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-alibaba-nacos-discovery -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>0.2.1.RELEASE</version>
+        </dependency>
 
         <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.activiti/activiti-spring-boot-starter &ndash;&gt;
         <dependency>

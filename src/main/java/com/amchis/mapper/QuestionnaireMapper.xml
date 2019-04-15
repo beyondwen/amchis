@@ -21,14 +21,14 @@
     <result column="infection" jdbcType="VARCHAR" property="infections" />
     <result column="adverse_reactions" jdbcType="VARCHAR" property="adverseReactions" />
     <result column="medical_history" jdbcType="VARCHAR" property="medicalHistorys" />
-    <result column="history_of_surgery" jdbcType="VARCHAR" property="historyOfSurgery" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
     id, user_name, valid, phone, career, educational_level, marital_status, sleep_condition,
     smoking, drink, favorite_sport, weekly_exercise_time, health_investment, diabetes,
     cardiovascular_disease, skin_disease, infection, adverse_reactions, medical_history,
-    history_of_surgery,create_time
+    gender,create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -47,14 +47,14 @@
       drink, favorite_sport, weekly_exercise_time, 
       health_investment, diabetes, cardiovascular_disease,
       skin_disease, infection, adverse_reactions,
-      medical_history, history_of_surgery,create_time)
+      medical_history, gender,create_time)
     values (#{userName,jdbcType=VARCHAR}, #{valid,jdbcType=VARCHAR},
       #{phone,jdbcType=VARCHAR}, #{career,jdbcType=VARCHAR}, #{educationalLevel,jdbcType=VARCHAR}, 
       #{maritalStatus,jdbcType=VARCHAR}, #{sleepCondition,jdbcType=VARCHAR}, #{smoking,jdbcType=VARCHAR}, 
       #{drink,jdbcType=VARCHAR}, #{favoriteSports,jdbcType=VARCHAR}, #{weeklyExerciseTimes,jdbcType=VARCHAR},
       #{healthInvestments,jdbcType=VARCHAR}, #{diabetess,jdbcType=VARCHAR}, #{cardiovascularDiseases,jdbcType=VARCHAR},
       #{skinDiseases,jdbcType=VARCHAR}, #{infections,jdbcType=VARCHAR}, #{adverseReactions,jdbcType=VARCHAR},
-      #{medicalHistorys,jdbcType=VARCHAR}, #{historyOfSurgery,jdbcType=VARCHAR},#{createTime})
+      #{medicalHistorys,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR},#{createTime})
   </insert>
   <insert id="insertSelective" parameterType="com.amchis.bean.Questionnaire">
     insert into questionnaire
@@ -113,8 +113,8 @@
       <if test="medicalHistorys != null">
         medical_history,
       </if>
-      <if test="historyOfSurgery != null">
-        history_of_surgery,
+      <if test="gender != null">
+        gender,
       </if>
       <if test="createTime != null">
         create_time,
@@ -175,8 +175,8 @@
       <if test="medicalHistorys != null">
         #{medicalHistorys,jdbcType=VARCHAR},
       </if>
-      <if test="historyOfSurgery != null">
-        #{historyOfSurgery,jdbcType=VARCHAR},
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=VARCHAR},
@@ -240,8 +240,8 @@
       <if test="medicalHistorys != null">
         medical_history = #{medicalHistorys,jdbcType=VARCHAR},
       </if>
-      <if test="historyOfSurgery != null">
-        history_of_surgery = #{historyOfSurgery,jdbcType=VARCHAR},
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=VARCHAR},
@@ -269,7 +269,7 @@
       infection = #{infections,jdbcType=VARCHAR},
       adverse_reactions = #{adverseReactions,jdbcType=VARCHAR},
       medical_history = #{medicalHistorys,jdbcType=VARCHAR},
-      history_of_surgery = #{historyOfSurgery,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=TINYINT}
   </update>

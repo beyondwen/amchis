@@ -1,0 +1,349 @@
+<table>
+        <tr style="text-align:center;">
+            <th>接口</th>
+            <th>接口名称</th>
+            <th>请求类型</th>
+            <th>参数</th>
+            <th>返回</th>
+        </tr>
+        <tr style="text-align:center;">
+            <th>/login</th>
+            <th>登录接口</th>
+            <th>Post</th>
+            <th>username:账号(String)<br>
+                password:密码(String)
+            </th>
+            <th>Integer code;状态码(200成功/500错误) <br>
+                 String msg;返回消息<br>
+                 Object obj;返回数据<br>
+                 user(对象)<br>
+                //用户idLong id;<br>
+                //用户姓名String name;<br>
+                //用户手机String phone;<br>
+                //用户电话String telephone;<br>
+                //用户地址String address;<br>
+                //是否启用boolean enabled;<br>
+                //帐号String username;<br>
+                //备注String remark;<br>
+                //用户角色集合List<Role> roles;<br>
+                //用户头像String userface;<br>
+        </th>
+        </tr>
+        <tr>
+            <th>config/sysmenu</th>
+            <th>获取菜单</th>
+            <th>Get</th>
+            <th>无</th>
+            <th>
+                //菜单id
+                 Long id;<br>
+                //页面路径
+                 String path;<br>
+                //组件(vue菜单树相关 预留)
+                 Object component;<br>
+                //菜单名称
+                 String name;<br>
+                //图标
+                 String iconCls;<br>
+                //子菜单
+                 List<Menu> children;<br>
+                //vue菜单树相关 预留
+                 MenuMeta meta;<br>
+            </th>
+        </tr>
+        <tr>
+            <th>/image/upload</th>
+            <th>图片上传</th>
+            <th>Post</th>
+            <th>文件类型</th>
+            <th> 
+                Integer code;状态码(200成功/500错误)<br>
+                String msg;返回消息<br>
+                Object obj;返回数据<br>
+                file(对象)<br>
+                //文件类型(1新闻2论坛)
+                int type;<br>
+                //文件名
+                String name;<br>
+                //文件大小
+                int size;<br>
+                //下载地址URL
+                String url;<br>
+            </th>
+        </tr>
+        <tr>
+           <th>/officialwebsite/addNews</th>
+           <th>新闻添加</th>
+           <th>Post</th>
+           <th>
+               newsType:新闻类型(1新闻/2论坛)(int)<br>
+               classification:论坛分类 (int)<br>
+               newsTitle:新闻标题(String)<br>
+               newsContent:新闻内容(String)<br>
+           </th>
+           <th>  
+               Integer code;状态码(200成功/500错误)<br>
+               String msg;返回消息<br>
+               Object obj;返回数据<br>
+           </th>
+        </tr>
+        <tr>
+        <th>/officialwebsite/news</th>
+        <th>新闻多条查询</th>
+        <th>Get</th>
+        <th>
+            Integer pageNo 页码<br>
+            int pageSize 每页数据<br>
+            Integer newType 新闻类型(1新闻/2论坛)<br>
+            Integer valid; 是否有效(0已发布/1未发布)<br>
+            Integer classification:论坛分类 (int)<br>
+        </th>
+        <th>  
+            Integer code;状态码(200成功/500错误)<br>
+            String msg;返回消息<br>
+            Object obj;返回数据<br>
+            HomeNews(对象)<br>
+            //id
+            Integer id;<br>
+            //新闻类型
+            Integer newsType;<br>
+            //标题
+            String newsTitle;<br>
+            //内容
+            String newsContent;<br>
+            //创建时间
+            String createTime;<br>
+            //创建人
+            String createUsername;<br>
+        </th>
+        </tr>
+        <tr>
+            <th>/officialwebsite/getOneNews</th>
+            <th>查询单条新闻</th>
+            <th>Get</th>
+            <th>Integer newsId 新闻id</th>
+            <th>   
+                Integer code;状态码(200成功/500错误)<br>
+                String msg;返回消息<br>
+                Object obj;返回数据<br>
+                HomeNews(对象)<br>
+                //id
+                Integer id;<br>
+                新闻类型
+                Integer newsType;<br>
+                //标题
+                String newsTitle;<br>
+                //内容
+                String newsContent;<br>
+                //创建时间
+                String createTime;<br>
+                //创建人
+                String createUsername;<br>
+            </th>
+        </tr>
+        <tr>
+            <th>/officialwebsite/deleteNew</th>
+            <th>删除新闻</th>
+            <th>Post</th>
+            <th>Integer newsId 新闻id</th>
+            <th>    
+                Integer code;状态码(200成功/500错误)<br>
+                String msg;返回消息<br>
+                Object obj;返回数据<br>
+            </th>
+        </tr>
+        <tr>
+            <th>/officialwebsite/releaseNew</th>
+            <th>发布新闻</th>
+            <th>Post</th>
+            <th>Integer newsId 新闻id</th>
+            <th>    
+                Integer code;状态码(200成功/500错误)<br>
+                String msg;返回消息<br>
+                Object obj;返回数据<br>
+            </th>
+        </tr>
+        <tr>
+            <th>/questionnaire/add</th>
+            <th>添加问卷调查</th>
+            <th>Post</th>
+            <th>
+                userName:姓名 String<br>
+                gender:性别 String<br>
+                phone:手机号 String<br>
+                weight:体重 BigDecimal(数字类型)<br>
+                height:身高 BigDecimal(数字类型)<br>
+                career:职业 String<br>
+                educationalLevel:文化程度 String<br>
+                directDiabetes:直系亲属是否有糖尿病 String<br>
+                isDiabetesKnowledge:是否知道糖尿病知识 String<br>
+                diabetesType:糖尿病类型 String<br>
+                diabetesTherapys:糖尿病疗法 String[](数组)<br>
+                taste:口味 String<br>
+                fruitVegetableConsumption:水果蔬菜使用情况 String<br>
+                weeklyExerciseTimes:周锻炼时间 String[](数组)<br>
+                favoriteSports:喜欢的运动 String[](数组)<br>
+                isKeepSleeping:能否保持8小时睡眠 String<br>
+                illnesss:有哪些病症 String[](数组)<br>
+                healthInvestments:健康投资 String[](数组)<br>
+                smoking:是否吸烟 String<br>
+                drink:是否饮酒 String<br>
+                hypoglycemia:低血糖反应 String<br>
+                otherChronicDiseasess:其他慢性病 String[](数组)<br>
+                diabetesComplications:糖尿病并发症 String<br>
+                isControlBloodSugar:是否控制血糖 String<br>
+                controlBloodSugarMeasuress:控制血糖措施 String[](数组)<br>
+                useHypoglycemicAgents:如何使用降糖药 String<br>
+            </th>
+            <th>    
+                Integer code;状态码(200成功/500错误)<br>
+                String msg;返回消息<br>
+                Object obj;返回数据<br>
+            </th>
+        </tr>
+        <tr>
+            <th>/questionnaire/get</th>
+            <th>分页列表</th>
+            <th>Post</th>
+            <th>
+                 Integer pageNo 页码<br>
+                 int pageSize 每页数据<br>
+            </th>
+            <th>    
+                 Integer code;状态码(200成功/500错误)<br>
+                 String msg;返回消息<br>
+                 Object obj;返回数据<br>
+                 Questionnaire(对象)<br>
+                 //id
+                 Integer id;<br>
+                 //姓名
+                 String userName;<br>
+                 //性别
+                 String gender;<br>
+                 //(未查看/已查看)
+                 String valid;<br>
+                 //手机号码
+                 String phone;<br>
+                 //体重
+                 BigDecimal weight;<br>
+                 //身高
+                 BigDecimal height;<br>
+                 //职业
+                 String career;<br>
+                 //文化程度
+                 String educationalLevel;<br>
+                 //直系亲属是否有糖尿病
+                 String directDiabetes;<br>
+                 //是否知道糖尿病知识
+                 String isDiabetesKnowledge;<br>
+                 //糖尿病类型
+                 String diabetesType;<br>
+                 //糖尿病疗法
+                 String diabetesTherapy;<br>
+                 //口味
+                 String taste;<br>
+                 //水果蔬菜食用情况
+                 String fruitVegetableConsumption;<br>
+                 //周锻炼时间
+                 String weeklyExerciseTime;<br>
+                 //喜欢的运动
+                 String favoriteSport;<br>
+                 //能否保持8小时睡眠
+                 String isKeepSleeping;<br>
+                 //有哪些病症
+                 String illness;<br>
+                 //健康投资
+                 String healthInvestment;<br>
+                 //吸烟情况
+                 String smoking;<br>
+                 //饮酒情况
+                 String drink;<br>
+                 //低血糖反应
+                 String hypoglycemia;<br>
+                 //其他慢性病
+                 String otherChronicDiseases;<br>
+                 //糖尿病并发症
+                 String diabetesComplications;<br>
+                 //是否控制血糖
+                 String isControlBloodSugar;<br>
+                 //控制血糖措施
+                 String controlBloodSugarMeasures;<br>
+                 //如何使用降糖药
+                 String useHypoglycemicAgents;<br>
+                 //创建时间
+                 String createTime;<br>
+            </th>
+       </tr>
+       <tr>
+          <th>/questionnaire/getOne</th>
+          <th>详情</th>
+          <th>Post</th>
+          <th>
+               Integer id 问卷id<br>
+          </th>
+          <th>    
+               Integer code;状态码(200成功/500错误)<br>
+               String msg;返回消息<br>
+               Object obj;返回数据<br>
+               Questionnaire(对象)<br>
+               //id
+               Integer id;<br>
+               //姓名
+               String userName;<br>
+               //性别
+               String gender;<br>
+               //(未查看/已查看)
+               String valid;<br>
+               //手机号码
+               String phone;<br>
+               //体重
+               BigDecimal weight;<br>
+               //身高
+               BigDecimal height;<br>
+               //职业
+               String career;<br>
+               //文化程度
+               String educationalLevel;<br>
+               //直系亲属是否有糖尿病
+               String directDiabetes;<br>
+               //是否知道糖尿病知识
+               String isDiabetesKnowledge;<br>
+               //糖尿病类型
+               String diabetesType;<br>
+               //糖尿病疗法
+               String diabetesTherapy;<br>
+               //口味
+               String taste;<br>
+               //水果蔬菜食用情况
+               String fruitVegetableConsumption;<br>
+               //周锻炼时间
+               String weeklyExerciseTime;<br>
+               //喜欢的运动
+               String favoriteSport;<br>
+               //能否保持8小时睡眠
+               String isKeepSleeping;<br>
+               //有哪些病症
+               String illness;<br>
+               //健康投资
+               String healthInvestment;<br>
+               //吸烟情况
+               String smoking;<br>
+               //饮酒情况
+               String drink;<br>
+               //低血糖反应
+               String hypoglycemia;<br>
+               //其他慢性病
+               String otherChronicDiseases;<br>
+               //糖尿病并发症
+               String diabetesComplications;<br>
+               //是否控制血糖
+               String isControlBloodSugar;<br>
+               //控制血糖措施
+               String controlBloodSugarMeasures;<br>
+               //如何使用降糖药
+               String useHypoglycemicAgents;<br>
+               //创建时间
+               String createTime;<br>
+          </th>
+       </tr>
+    </table>

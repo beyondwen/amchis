@@ -4,7 +4,6 @@ import com.amchis.bean.Questionnaire;
 import com.amchis.bean.query.QuestionnaireQuery;
 import com.amchis.mapper.QuestionnaireMapper;
 import com.github.pagehelper.Page;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,27 +18,42 @@ public class QuestionnaireService {
     }
 
     public int insert(Questionnaire record) {
-        String[] favoriteSport = record.getFavoriteSport();
+        String[] favoriteSport = record.getFavoriteSports();
         StringBuilder favoriteSports = new StringBuilder();
         processString(favoriteSport, favoriteSports);
-        record.setFavoriteSports(favoriteSports.toString());
+        record.setFavoriteSport(favoriteSports.toString());
 
-        String[] weeklyExerciseTime = record.getWeeklyExerciseTime();
+        String[] weeklyExerciseTime = record.getWeeklyExerciseTimes();
         StringBuilder weeklyExerciseTimes = new StringBuilder();
         processString(weeklyExerciseTime, weeklyExerciseTimes);
-        record.setWeeklyExerciseTimes(weeklyExerciseTimes.toString());
+        record.setWeeklyExerciseTime(weeklyExerciseTimes.toString());
 
-        String[] healthInvestment = record.getHealthInvestment();
+        String[] healthInvestment = record.getHealthInvestments();
         StringBuilder healthInvestments = new StringBuilder();
         processString(healthInvestment, healthInvestments);
-        record.setHealthInvestments(healthInvestments.toString());
+        record.setHealthInvestment(healthInvestments.toString());
 
-        String[] diabetes = record.getDiabetes();
+        String[] otherChronicDiseasess = record.getOtherChronicDiseasess();
         StringBuilder diabetess = new StringBuilder();
-        processString(diabetes, diabetess);
-        record.setDiabetess(diabetess.toString());
+        processString(otherChronicDiseasess, diabetess);
+        record.setOtherChronicDiseases(diabetess.toString());
 
-        String[] cardiovascularDisease = record.getCardiovascularDisease();
+        String[] illnesss = record.getIllnesss();
+        StringBuilder illness = new StringBuilder();
+        processString(illnesss, illness);
+        record.setIllness(illness.toString());
+
+        String[] diabetesTherapys = record.getDiabetesTherapys();
+        StringBuilder diabetesTherapy = new StringBuilder();
+        processString(diabetesTherapys, diabetesTherapy);
+        record.setDiabetesTherapy(diabetesTherapy.toString());
+
+        String[] controlBloodSugarMeasuress = record.getControlBloodSugarMeasuress();
+        StringBuilder controlBloodSugarMeasures = new StringBuilder();
+        processString(controlBloodSugarMeasuress, controlBloodSugarMeasures);
+        record.setControlBloodSugarMeasures(controlBloodSugarMeasures.toString());
+
+        /*String[] cardiovascularDisease = record.getCardiovascularDisease();
         StringBuilder cardiovascularDiseases = new StringBuilder();
         processString(cardiovascularDisease, cardiovascularDiseases);
         record.setCardiovascularDiseases(cardiovascularDiseases.toString());
@@ -57,7 +71,7 @@ public class QuestionnaireService {
         String[] medicalHistory = record.getMedicalHistory();
         StringBuilder medicalHistorys = new StringBuilder();
         processString(medicalHistory, medicalHistorys);
-        record.setMedicalHistorys(medicalHistorys.toString());
+        record.setMedicalHistorys(medicalHistorys.toString());*/
         return questionnaireMapper.insert(record);
     }
 

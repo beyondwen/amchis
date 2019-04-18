@@ -16,12 +16,11 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://11.0.0.123:3306/mhsy?nullCatalogMeansCurrent=true" userId="mhsymysql"
                         password="mhsymysql"/>
-        <javaModelGenerator targetPackage="com.amchis.bean" targetProject="D:\githubhome\amchis\src\main\java"/>
-        <sqlMapGenerator targetPackage="com.amchis.mapper"
-                         targetProject="D:\githubhome\amchis\src\main\java"></sqlMapGenerator>
-        <javaClientGenerator targetPackage="com.amchis.mapper" targetProject="D:\githubhome\amchis\src\main\java"
+        <javaModelGenerator targetPackage="com.amchis.bean.test" targetProject="D:\githubhome\amchis\src\main\java"/>
+        <sqlMapGenerator targetPackage="com.amchis.mapper.test" targetProject="D:\githubhome\amchis\src\main\java"></sqlMapGenerator>
+        <javaClientGenerator targetPackage="com.amchis.mapper.test" targetProject="D:\githubhome\amchis\src\main\java"
                              type="XMLMAPPER"/>
-        <table schema="questionnaire" tableName="questionnaire" domainObjectName="Questionnaire"
+        <table schema="questionnaire" tableName="questionnaire" domainObjectName="questionnaire_survey"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"
                enableDeleteByPrimaryKey="true" enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true">

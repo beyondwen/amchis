@@ -1,10 +1,10 @@
 package com.amchis.config;
 
+import com.amchis.config.filter.CustomAuthenticationFilter;
 import com.amchis.config.handler.AuthenticationAccessDeniedHandler;
 import com.amchis.config.handler.CustomLogoutSuccessHandler;
 import com.amchis.config.handler.FailureAuthenticationFailureHandler;
 import com.amchis.config.handler.SucessAuthenticationSuccessHandler;
-import com.amchis.config.filter.CustomAuthenticationFilter;
 import com.amchis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -46,7 +45,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/index.html", "/static/**", "/login_p", "/favicon.ico", "/image/downloadimg", "/officialwebsite/**","/questionnaire/**");
+        web.ignoring().antMatchers("/index.html");
+        web.ignoring().antMatchers("/static/**");
+        web.ignoring().antMatchers("/login_p");
+        web.ignoring().antMatchers("/favicon.ico");
+        web.ignoring().antMatchers("/image/downloadimg");
+        web.ignoring().antMatchers("/officialwebsite/**");
+        web.ignoring().antMatchers("/questionnaire/**");
     }
 
     @Override
@@ -76,7 +81,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and().csrf().disable()
                 .exceptionHandling().accessDeniedHandler(deniedHandler);
-
         //用重写的Filter替换掉原有的UsernamePasswordAuthenticationFilter
         //http.addFilterAt(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

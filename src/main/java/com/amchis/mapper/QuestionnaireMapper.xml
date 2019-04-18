@@ -4,31 +4,40 @@
   <resultMap id="BaseResultMap" type="com.amchis.bean.Questionnaire">
     <id column="id" jdbcType="TINYINT" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="valid" jdbcType="VARCHAR" property="valid" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="career" jdbcType="VARCHAR" property="career" />
-    <result column="educational_level" jdbcType="VARCHAR" property="educationalLevel" />
-    <result column="marital_status" jdbcType="VARCHAR" property="maritalStatus" />
-    <result column="sleep_condition" jdbcType="VARCHAR" property="sleepCondition" />
-    <result column="smoking" jdbcType="VARCHAR" property="smoking" />
-    <result column="drink" jdbcType="VARCHAR" property="drink" />
-    <result column="favorite_sport" jdbcType="VARCHAR" property="favoriteSports" />
-    <result column="weekly_exercise_time" jdbcType="VARCHAR" property="weeklyExerciseTimes" />
-    <result column="health_investment" jdbcType="VARCHAR" property="healthInvestments" />
-    <result column="diabetes" jdbcType="VARCHAR" property="diabetess" />
-    <result column="cardiovascular_disease" jdbcType="VARCHAR" property="cardiovascularDiseases" />
-    <result column="skin_disease" jdbcType="VARCHAR" property="skinDiseases" />
-    <result column="infection" jdbcType="VARCHAR" property="infections" />
-    <result column="adverse_reactions" jdbcType="VARCHAR" property="adverseReactions" />
-    <result column="medical_history" jdbcType="VARCHAR" property="medicalHistorys" />
     <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="height" jdbcType="DECIMAL" property="height" />
+    <result column="valid" jdbcType="VARCHAR" property="valid" />
+    <result column="educational_level" jdbcType="VARCHAR" property="educationalLevel" />
+    <result column="career" jdbcType="VARCHAR" property="career" />
+    <result column="direct_diabetes" jdbcType="VARCHAR" property="directDiabetes" />
+    <result column="is_diabetes_knowledge" jdbcType="VARCHAR" property="isDiabetesKnowledge" />
+    <result column="diabetes_type" jdbcType="VARCHAR" property="diabetesType" />
+    <result column="diabetes_therapy" jdbcType="VARCHAR" property="diabetesTherapy" />
+    <result column="taste" jdbcType="VARCHAR" property="taste" />
+    <result column="fruit_vegetable_consumption" jdbcType="VARCHAR" property="fruitVegetableConsumption" />
+    <result column="weekly_exercise_time" jdbcType="VARCHAR" property="weeklyExerciseTime" />
+    <result column="favorite_sport" jdbcType="VARCHAR" property="favoriteSport" />
+    <result column="is_keep_sleeping" jdbcType="VARCHAR" property="isKeepSleeping" />
+    <result column="drink" jdbcType="VARCHAR" property="drink" />
+    <result column="smoking" jdbcType="VARCHAR" property="smoking" />
+    <result column="health_investment" jdbcType="VARCHAR" property="healthInvestment" />
+    <result column="Illness" jdbcType="VARCHAR" property="illness" />
+    <result column="hypoglycemia" jdbcType="VARCHAR" property="hypoglycemia" />
+    <result column="other_chronic_diseases" jdbcType="VARCHAR" property="otherChronicDiseases" />
+    <result column="diabetes_complications" jdbcType="VARCHAR" property="diabetesComplications" />
+    <result column="is_control_blood_sugar" jdbcType="VARCHAR" property="isControlBloodSugar" />
+    <result column="control_blood_sugar_measures" jdbcType="VARCHAR" property="controlBloodSugarMeasures" />
+    <result column="use_hypoglycemic_agents" jdbcType="VARCHAR" property="useHypoglycemicAgents" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_name, valid, phone, career, educational_level, marital_status, sleep_condition,
-    smoking, drink, favorite_sport, weekly_exercise_time, health_investment, diabetes,
-    cardiovascular_disease, skin_disease, infection, adverse_reactions, medical_history,
-    gender,create_time
+    id, user_name, gender, phone, weight, height, valid, educational_level, career, direct_diabetes,
+    is_diabetes_knowledge, diabetes_type, diabetes_therapy, taste, fruit_vegetable_consumption,
+    weekly_exercise_time, favorite_sport, is_keep_sleeping, drink, smoking, health_investment,
+    Illness, hypoglycemia, other_chronic_diseases, diabetes_complications,
+    is_control_blood_sugar, control_blood_sugar_measures, use_hypoglycemic_agents, create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -41,142 +50,206 @@
     where id = #{id,jdbcType=TINYINT}
   </delete>
   <insert id="insert" parameterType="com.amchis.bean.Questionnaire">
-    insert into questionnaire (user_name, valid,
-      phone, career, educational_level, 
-      marital_status, sleep_condition, smoking, 
-      drink, favorite_sport, weekly_exercise_time, 
-      health_investment, diabetes, cardiovascular_disease,
-      skin_disease, infection, adverse_reactions,
-      medical_history, gender,create_time)
-    values (#{userName,jdbcType=VARCHAR}, #{valid,jdbcType=VARCHAR},
-      #{phone,jdbcType=VARCHAR}, #{career,jdbcType=VARCHAR}, #{educationalLevel,jdbcType=VARCHAR}, 
-      #{maritalStatus,jdbcType=VARCHAR}, #{sleepCondition,jdbcType=VARCHAR}, #{smoking,jdbcType=VARCHAR}, 
-      #{drink,jdbcType=VARCHAR}, #{favoriteSports,jdbcType=VARCHAR}, #{weeklyExerciseTimes,jdbcType=VARCHAR},
-      #{healthInvestments,jdbcType=VARCHAR}, #{diabetess,jdbcType=VARCHAR}, #{cardiovascularDiseases,jdbcType=VARCHAR},
-      #{skinDiseases,jdbcType=VARCHAR}, #{infections,jdbcType=VARCHAR}, #{adverseReactions,jdbcType=VARCHAR},
-      #{medicalHistorys,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR},#{createTime})
+    insert into questionnaire (id, user_name, gender,
+      phone, weight, height,
+      valid, educational_level, career,
+      direct_diabetes, is_diabetes_knowledge, diabetes_type,
+      diabetes_therapy, taste, fruit_vegetable_consumption,
+      weekly_exercise_time, favorite_sport, is_keep_sleeping,
+      drink, smoking, health_investment,
+      Illness, hypoglycemia, other_chronic_diseases,
+      diabetes_complications,
+      is_control_blood_sugar, control_blood_sugar_measures,
+      use_hypoglycemic_agents, create_time)
+    values (#{id,jdbcType=TINYINT}, #{userName,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, #{height,jdbcType=DECIMAL},
+      #{valid,jdbcType=VARCHAR}, #{educationalLevel,jdbcType=VARCHAR}, #{career,jdbcType=VARCHAR},
+      #{directDiabetes,jdbcType=VARCHAR}, #{isDiabetesKnowledge,jdbcType=VARCHAR}, #{diabetesType,jdbcType=VARCHAR},
+      #{diabetesTherapy,jdbcType=VARCHAR}, #{taste,jdbcType=VARCHAR}, #{fruitVegetableConsumption,jdbcType=VARCHAR},
+      #{weeklyExerciseTime,jdbcType=VARCHAR}, #{favoriteSport,jdbcType=VARCHAR}, #{isKeepSleeping,jdbcType=VARCHAR},
+      #{drink,jdbcType=VARCHAR}, #{smoking,jdbcType=VARCHAR}, #{healthInvestment,jdbcType=VARCHAR},
+      #{illness,jdbcType=VARCHAR}, #{hypoglycemia,jdbcType=VARCHAR}, #{otherChronicDiseases,jdbcType=VARCHAR},
+      #{diabetesComplications,jdbcType=VARCHAR},
+      #{isControlBloodSugar,jdbcType=VARCHAR}, #{controlBloodSugarMeasures,jdbcType=VARCHAR},
+      #{useHypoglycemicAgents,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.amchis.bean.Questionnaire">
     insert into questionnaire
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="userName != null">
         user_name,
       </if>
-      <if test="valid != null">
-        valid,
+      <if test="gender != null">
+        gender,
       </if>
       <if test="phone != null">
         phone,
       </if>
-      <if test="career != null">
-        career,
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="valid != null">
+        valid,
       </if>
       <if test="educationalLevel != null">
         educational_level,
       </if>
-      <if test="maritalStatus != null">
-        marital_status,
+      <if test="career != null">
+        career,
       </if>
-      <if test="sleepCondition != null">
-        sleep_condition,
+      <if test="directDiabetes != null">
+        direct_diabetes,
       </if>
-      <if test="smoking != null">
-        smoking,
+      <if test="isDiabetesKnowledge != null">
+        is_diabetes_knowledge,
+      </if>
+      <if test="diabetesType != null">
+        diabetes_type,
+      </if>
+      <if test="diabetesTherapy != null">
+        diabetes_therapy,
+      </if>
+      <if test="taste != null">
+        taste,
+      </if>
+      <if test="fruitVegetableConsumption != null">
+        fruit_vegetable_consumption,
+      </if>
+      <if test="weeklyExerciseTime != null">
+        weekly_exercise_time,
+      </if>
+      <if test="favoriteSport != null">
+        favorite_sport,
+      </if>
+      <if test="isKeepSleeping != null">
+        is_keep_sleeping,
       </if>
       <if test="drink != null">
         drink,
       </if>
-      <if test="favoriteSports != null">
-        favorite_sport,
+      <if test="smoking != null">
+        smoking,
       </if>
-      <if test="weeklyExerciseTimes != null">
-        weekly_exercise_time,
-      </if>
-      <if test="healthInvestments != null">
+      <if test="healthInvestment != null">
         health_investment,
       </if>
-      <if test="diabetess != null">
-        diabetes,
+      <if test="illness != null">
+        Illness,
       </if>
-      <if test="cardiovascularDiseases != null">
-        cardiovascular_disease,
+      <if test="hypoglycemia != null">
+        hypoglycemia,
       </if>
-      <if test="skinDiseases != null">
-        skin_disease,
+      <if test="otherChronicDiseases != null">
+        other_chronic_diseases,
       </if>
-      <if test="infections != null">
-        infection,
+      <if test="diabetesComplications != null">
+        diabetes_complications,
       </if>
-      <if test="adverseReactions != null">
-        adverse_reactions,
+
+      <if test="isControlBloodSugar != null">
+        is_control_blood_sugar,
       </if>
-      <if test="medicalHistorys != null">
-        medical_history,
+      <if test="controlBloodSugarMeasures != null">
+        control_blood_sugar_measures,
       </if>
-      <if test="gender != null">
-        gender,
+      <if test="useHypoglycemicAgents != null">
+        use_hypoglycemic_agents,
       </if>
       <if test="createTime != null">
         create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=TINYINT},
+      </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="valid != null">
-        #{valid,jdbcType=VARCHAR},
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="career != null">
-        #{career,jdbcType=VARCHAR},
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=DECIMAL},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=VARCHAR},
       </if>
       <if test="educationalLevel != null">
         #{educationalLevel,jdbcType=VARCHAR},
       </if>
-      <if test="maritalStatus != null">
-        #{maritalStatus,jdbcType=VARCHAR},
+      <if test="career != null">
+        #{career,jdbcType=VARCHAR},
       </if>
-      <if test="sleepCondition != null">
-        #{sleepCondition,jdbcType=VARCHAR},
+      <if test="directDiabetes != null">
+        #{directDiabetes,jdbcType=VARCHAR},
       </if>
-      <if test="smoking != null">
-        #{smoking,jdbcType=VARCHAR},
+      <if test="isDiabetesKnowledge != null">
+        #{isDiabetesKnowledge,jdbcType=VARCHAR},
+      </if>
+      <if test="diabetesType != null">
+        #{diabetesType,jdbcType=VARCHAR},
+      </if>
+      <if test="diabetesTherapy != null">
+        #{diabetesTherapy,jdbcType=VARCHAR},
+      </if>
+      <if test="taste != null">
+        #{taste,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitVegetableConsumption != null">
+        #{fruitVegetableConsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="weeklyExerciseTime != null">
+        #{weeklyExerciseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="favoriteSport != null">
+        #{favoriteSport,jdbcType=VARCHAR},
+      </if>
+      <if test="isKeepSleeping != null">
+        #{isKeepSleeping,jdbcType=VARCHAR},
       </if>
       <if test="drink != null">
         #{drink,jdbcType=VARCHAR},
       </if>
-      <if test="favoriteSports != null">
-        #{favoriteSports,jdbcType=VARCHAR},
+      <if test="smoking != null">
+        #{smoking,jdbcType=VARCHAR},
       </if>
-      <if test="weeklyExerciseTimes != null">
-        #{weeklyExerciseTimes,jdbcType=VARCHAR},
+      <if test="healthInvestment != null">
+        #{healthInvestment,jdbcType=VARCHAR},
       </if>
-      <if test="healthInvestments != null">
-        #{healthInvestments,jdbcType=VARCHAR},
+      <if test="illness != null">
+        #{illness,jdbcType=VARCHAR},
       </if>
-      <if test="diabetess != null">
-        #{diabetess,jdbcType=VARCHAR},
+      <if test="hypoglycemia != null">
+        #{hypoglycemia,jdbcType=VARCHAR},
       </if>
-      <if test="cardiovascularDiseases != null">
-        #{cardiovascularDiseases,jdbcType=VARCHAR},
+      <if test="otherChronicDiseases != null">
+        #{otherChronicDiseases,jdbcType=VARCHAR},
       </if>
-      <if test="skinDiseases != null">
-        #{skinDiseases,jdbcType=VARCHAR},
+      <if test="diabetesComplications != null">
+        #{diabetesComplications,jdbcType=VARCHAR},
       </if>
-      <if test="infections != null">
-        #{infections,jdbcType=VARCHAR},
+
+      <if test="isControlBloodSugar != null">
+        #{isControlBloodSugar,jdbcType=VARCHAR},
       </if>
-      <if test="adverseReactions != null">
-        #{adverseReactions,jdbcType=VARCHAR},
+      <if test="controlBloodSugarMeasures != null">
+        #{controlBloodSugarMeasures,jdbcType=VARCHAR},
       </if>
-      <if test="medicalHistorys != null">
-        #{medicalHistorys,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
+      <if test="useHypoglycemicAgents != null">
+        #{useHypoglycemicAgents,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=VARCHAR},
@@ -189,59 +262,84 @@
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="valid != null">
-        valid = #{valid,jdbcType=VARCHAR},
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="career != null">
-        career = #{career,jdbcType=VARCHAR},
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=DECIMAL},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=VARCHAR},
       </if>
       <if test="educationalLevel != null">
         educational_level = #{educationalLevel,jdbcType=VARCHAR},
       </if>
-      <if test="maritalStatus != null">
-        marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      <if test="career != null">
+        career = #{career,jdbcType=VARCHAR},
       </if>
-      <if test="sleepCondition != null">
-        sleep_condition = #{sleepCondition,jdbcType=VARCHAR},
+      <if test="directDiabetes != null">
+        direct_diabetes = #{directDiabetes,jdbcType=VARCHAR},
       </if>
-      <if test="smoking != null">
-        smoking = #{smoking,jdbcType=VARCHAR},
+      <if test="isDiabetesKnowledge != null">
+        is_diabetes_knowledge = #{isDiabetesKnowledge,jdbcType=VARCHAR},
+      </if>
+      <if test="diabetesType != null">
+        diabetes_type = #{diabetesType,jdbcType=VARCHAR},
+      </if>
+      <if test="diabetesTherapy != null">
+        diabetes_therapy = #{diabetesTherapy,jdbcType=VARCHAR},
+      </if>
+      <if test="taste != null">
+        taste = #{taste,jdbcType=VARCHAR},
+      </if>
+      <if test="fruitVegetableConsumption != null">
+        fruit_vegetable_consumption = #{fruitVegetableConsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="weeklyExerciseTime != null">
+        weekly_exercise_time = #{weeklyExerciseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="favoriteSport != null">
+        favorite_sport = #{favoriteSport,jdbcType=VARCHAR},
+      </if>
+      <if test="isKeepSleeping != null">
+        is_keep_sleeping = #{isKeepSleeping,jdbcType=VARCHAR},
       </if>
       <if test="drink != null">
         drink = #{drink,jdbcType=VARCHAR},
       </if>
-      <if test="favoriteSports != null">
-        favorite_sport = #{favoriteSports,jdbcType=VARCHAR},
+      <if test="smoking != null">
+        smoking = #{smoking,jdbcType=VARCHAR},
       </if>
-      <if test="weeklyExerciseTimes != null">
-        weekly_exercise_time = #{weeklyExerciseTimes,jdbcType=VARCHAR},
+      <if test="healthInvestment != null">
+        health_investment = #{healthInvestment,jdbcType=VARCHAR},
       </if>
-      <if test="healthInvestments != null">
-        health_investment = #{healthInvestments,jdbcType=VARCHAR},
+      <if test="illness != null">
+        Illness = #{illness,jdbcType=VARCHAR},
       </if>
-      <if test="diabetess != null">
-        diabetes = #{diabetess,jdbcType=VARCHAR},
+      <if test="hypoglycemia != null">
+        hypoglycemia = #{hypoglycemia,jdbcType=VARCHAR},
       </if>
-      <if test="cardiovascularDiseases != null">
-        cardiovascular_disease = #{cardiovascularDiseases,jdbcType=VARCHAR},
+      <if test="otherChronicDiseases != null">
+        other_chronic_diseases = #{otherChronicDiseases,jdbcType=VARCHAR},
       </if>
-      <if test="skinDiseases != null">
-        skin_disease = #{skinDiseases,jdbcType=VARCHAR},
+      <if test="diabetesComplications != null">
+        diabetes_complications = #{diabetesComplications,jdbcType=VARCHAR},
       </if>
-      <if test="infections != null">
-        infection = #{infections,jdbcType=VARCHAR},
+
+      <if test="isControlBloodSugar != null">
+        is_control_blood_sugar = #{isControlBloodSugar,jdbcType=VARCHAR},
       </if>
-      <if test="adverseReactions != null">
-        adverse_reactions = #{adverseReactions,jdbcType=VARCHAR},
+      <if test="controlBloodSugarMeasures != null">
+        control_blood_sugar_measures = #{controlBloodSugarMeasures,jdbcType=VARCHAR},
       </if>
-      <if test="medicalHistorys != null">
-        medical_history = #{medicalHistorys,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=VARCHAR},
+      <if test="useHypoglycemicAgents != null">
+        use_hypoglycemic_agents = #{useHypoglycemicAgents,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=VARCHAR},
@@ -252,24 +350,32 @@
   <update id="updateByPrimaryKey" parameterType="com.amchis.bean.Questionnaire">
     update questionnaire
     set user_name = #{userName,jdbcType=VARCHAR},
-      valid = #{valid,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      career = #{career,jdbcType=VARCHAR},
-      educational_level = #{educationalLevel,jdbcType=VARCHAR},
-      marital_status = #{maritalStatus,jdbcType=VARCHAR},
-      sleep_condition = #{sleepCondition,jdbcType=VARCHAR},
-      smoking = #{smoking,jdbcType=VARCHAR},
-      drink = #{drink,jdbcType=VARCHAR},
-      favorite_sport = #{favoriteSports,jdbcType=VARCHAR},
-      weekly_exercise_time = #{weeklyExerciseTimes,jdbcType=VARCHAR},
-      health_investment = #{healthInvestments,jdbcType=VARCHAR},
-      diabetes = #{diabetess,jdbcType=VARCHAR},
-      cardiovascular_disease = #{cardiovascularDiseases,jdbcType=VARCHAR},
-      skin_disease = #{skinDiseases,jdbcType=VARCHAR},
-      infection = #{infections,jdbcType=VARCHAR},
-      adverse_reactions = #{adverseReactions,jdbcType=VARCHAR},
-      medical_history = #{medicalHistorys,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      height = #{height,jdbcType=DECIMAL},
+      valid = #{valid,jdbcType=VARCHAR},
+      educational_level = #{educationalLevel,jdbcType=VARCHAR},
+      career = #{career,jdbcType=VARCHAR},
+      direct_diabetes = #{directDiabetes,jdbcType=VARCHAR},
+      is_diabetes_knowledge = #{isDiabetesKnowledge,jdbcType=VARCHAR},
+      diabetes_type = #{diabetesType,jdbcType=VARCHAR},
+      diabetes_therapy = #{diabetesTherapy,jdbcType=VARCHAR},
+      taste = #{taste,jdbcType=VARCHAR},
+      fruit_vegetable_consumption = #{fruitVegetableConsumption,jdbcType=VARCHAR},
+      weekly_exercise_time = #{weeklyExerciseTime,jdbcType=VARCHAR},
+      favorite_sport = #{favoriteSport,jdbcType=VARCHAR},
+      is_keep_sleeping = #{isKeepSleeping,jdbcType=VARCHAR},
+      drink = #{drink,jdbcType=VARCHAR},
+      smoking = #{smoking,jdbcType=VARCHAR},
+      health_investment = #{healthInvestment,jdbcType=VARCHAR},
+      Illness = #{illness,jdbcType=VARCHAR},
+      hypoglycemia = #{hypoglycemia,jdbcType=VARCHAR},
+      other_chronic_diseases = #{otherChronicDiseases,jdbcType=VARCHAR},
+      diabetes_complications = #{diabetesComplications,jdbcType=VARCHAR},
+      is_control_blood_sugar = #{isControlBloodSugar,jdbcType=VARCHAR},
+      control_blood_sugar_measures = #{controlBloodSugarMeasures,jdbcType=VARCHAR},
+      use_hypoglycemic_agents = #{useHypoglycemicAgents,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=TINYINT}
   </update>

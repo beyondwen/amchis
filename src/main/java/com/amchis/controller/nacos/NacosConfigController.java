@@ -1,3 +1,4 @@
+/*
 package com.amchis.controller.nacos;
 
 import com.alibaba.nacos.api.config.annotation.NacosValue;
@@ -19,4 +20,4 @@ public class NacosConfigController {
     public boolean get() {
         return useLocalCache;
     }
-}
+}*/

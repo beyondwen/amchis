@@ -53,25 +53,10 @@ public class QuestionnaireService {
         processString(controlBloodSugarMeasuress, controlBloodSugarMeasures);
         record.setControlBloodSugarMeasures(controlBloodSugarMeasures.toString());
 
-        /*String[] cardiovascularDisease = record.getCardiovascularDisease();
-        StringBuilder cardiovascularDiseases = new StringBuilder();
-        processString(cardiovascularDisease, cardiovascularDiseases);
-        record.setCardiovascularDiseases(cardiovascularDiseases.toString());
-
-        String[] skinDisease = record.getSkinDisease();
-        StringBuilder skinDiseases = new StringBuilder();
-        processString(skinDisease, skinDiseases);
-        record.setSkinDiseases(skinDiseases.toString());
-
-        String[] infection = record.getInfection();
-        StringBuilder infections = new StringBuilder();
-        processString(infection, infections);
-        record.setInfections(infections.toString());
-
-        String[] medicalHistory = record.getMedicalHistory();
-        StringBuilder medicalHistorys = new StringBuilder();
-        processString(medicalHistory, medicalHistorys);
-        record.setMedicalHistorys(medicalHistorys.toString());*/
+        String[] diabetesComplicationss = record.getDiabetesComplicationss();
+        StringBuilder diabetesComplications = new StringBuilder();
+        processString(diabetesComplicationss, diabetesComplications);
+        record.setDiabetesComplications(diabetesComplications.toString());
         return questionnaireMapper.insert(record);
     }
 

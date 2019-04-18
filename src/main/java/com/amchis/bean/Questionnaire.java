@@ -111,6 +111,7 @@ public class Questionnaire {
     //糖尿病并发症
     @NotBlank(message = "糖尿病并发症不能为空")
     private String diabetesComplications;
+    private String[] diabetesComplicationss;
 
     //是否控制血糖
     @NotBlank(message = "是否控制血糖不能为空")

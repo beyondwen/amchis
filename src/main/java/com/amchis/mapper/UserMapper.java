@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface UserMapper {
+
     /**
      * @param username 登录用户名称
      * @return user 用户

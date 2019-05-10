@@ -23,11 +23,6 @@ public class QuestionnaireService {
         processString(favoriteSport, favoriteSports);
         record.setFavoriteSport(favoriteSports.toString());
 
-        String[] weeklyExerciseTime = record.getWeeklyExerciseTimes();
-        StringBuilder weeklyExerciseTimes = new StringBuilder();
-        processString(weeklyExerciseTime, weeklyExerciseTimes);
-        record.setWeeklyExerciseTime(weeklyExerciseTimes.toString());
-
         String[] healthInvestment = record.getHealthInvestments();
         StringBuilder healthInvestments = new StringBuilder();
         processString(healthInvestment, healthInvestments);

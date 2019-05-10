@@ -68,9 +68,8 @@ public class Questionnaire {
     private String fruitVegetableConsumption;
 
     //周锻炼时间
-    private String weeklyExerciseTime;
     @NotNull(message = "周锻炼时间不能为空")
-    private String[] weeklyExerciseTimes;
+    private String weeklyExerciseTime;
 
     //喜欢的运动
     private String favoriteSport;
@@ -109,8 +108,8 @@ public class Questionnaire {
     private String[] otherChronicDiseasess;
 
     //糖尿病并发症
-    @NotBlank(message = "糖尿病并发症不能为空")
     private String diabetesComplications;
+    @NotNull(message = "糖尿病并发症不能为空")
     private String[] diabetesComplicationss;
 
     //是否控制血糖

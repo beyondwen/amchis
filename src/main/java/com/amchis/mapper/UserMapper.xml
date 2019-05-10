@@ -18,7 +18,8 @@
     <resultMap id="lazyLoadRoles" type="com.amchis.bean.User" extends="BaseResultMap">
         <collection property="roles" ofType="com.amchis.bean.Role"
                     select="com.amchis.mapper.UserMapper.getRolesByUserId"
-                    column="id"></collection>
+                    column="id">
+        </collection>
     </resultMap>
     <resultMap id="eagerLoadRoles" type="com.amchis.bean.User" extends="BaseResultMap">
         <collection property="roles" ofType="com.amchis.bean.Role">
@@ -48,7 +49,7 @@
         LEFT JOIN role r ON u_r.rid = r.id
         <where>
             and u.id NOT IN ( SELECT * FROM user_role u_r, role r WHERE u_r.rid = r.id AND r.nameZh = '系统管理员' )
-            <if test="keywords!='all' and keywords!=''">
+            <if test="keywords!='null' and keywords!=''">
                 and u.name like concat('%',#{keywords},'%')
             </if>
         </where>
